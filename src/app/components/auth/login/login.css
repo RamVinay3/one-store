@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  background-color: var(--bg-section);
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 2rem 2rem;
+
+}
+
+.form-group {
+ max-width: 48rem;
+  padding: 3rem;
+  background: #fdfaf4;
+  border-radius: 1.6rem;
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.05);
+  
+}
+
+@media(max-width:420px){
+   
+    .form-group{
+        min-width: 30rem;
+    }
+}

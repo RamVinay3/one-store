@@ -1,11 +1,11 @@
-<div class="auth-header flex flex-row flex-space-between">
+<nav class="auth-header flex flex-row flex-space-between">
   <div>
      <p class="align-self"> Pista's Pilot.</p>
   </div>
-  <nav>
-    <a routerLink="login">Login</a>
-    <a routerLink="signup">signup</a>
-  </nav>
-</div>
+  <div>
+    <a [class.active]="currentRoute()=='login'" routerLink="login">Login</a>
+    <a  [class.active]="currentRoute()=='signup'" routerLink="signup" >Signup</a>
+  </div>
+</nav>
 
 <router-outlet/>

@@ -1,0 +1,20 @@
+<div class="input-group">
+  <label>{{ label }}</label>
+
+  <input
+    [value]="value"
+    [disabled]="disabled"
+    (input)="updateValue($event)"
+    (blur)="markTouched()"
+    [placeholder]="placeholder"
+    [type]="type"
+  />
+  
+  @if (error) {
+    
+      <small class="error"> 
+        {{error}}
+      </small>
+   
+  }
+</div>

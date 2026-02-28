@@ -1,1 +1,86 @@
-<p>signup works!</p>
+<form
+  [formGroup]="signupForm"
+  (ngSubmit)="signup()"
+  class="form-group"
+> 
+<div class="form-grid mb-2">
+  <form-input
+    label="first name"
+    type="text"
+    placeholder="enter first name"
+    formControlName="firstName"
+    [error]="getErrorMessage('firstName', signupForm,'First name')"
+  />
+
+  <form-input
+    label="second name"
+    type="text"
+    placeholder="enter second name"
+    formControlName="secondName"
+    [error]="getErrorMessage('secondName', signupForm,'Second name')"
+  />
+
+  <form-input
+    label="email"
+    type="email"
+    placeholder="enter email"
+    formControlName="email"
+    [error]="getErrorMessage('email', signupForm,'email')"
+  />
+
+  <form-input
+    label="email verification code"
+    type="text"
+    placeholder="enter email code"
+    formControlName="emailVerificationCode"
+    [error]="getErrorMessage('emailVerificationCode', signupForm,'email Code')"
+  />
+
+  <form-input
+    label="mobile No"
+    type="text"
+    placeholder="Enter Mobile No"
+    formControlName="mobileNo"
+    [error]="getErrorMessage('mobileNo', signupForm,'mobile No')"
+  />
+
+  <form-input
+    label="mobile verification code"
+    type="text"
+    placeholder="enter mobile code"
+    formControlName="mobileVerificationCode"
+    [error]="getErrorMessage('mobileVerificationCode', signupForm,'mobile Code')"
+  />
+
+  <form-input
+    label="password"
+    type="password"
+    placeholder="enter password"
+    formControlName="password"
+    [error]="getErrorMessage('password', signupForm,'password')"
+  />
+
+  <form-input
+    label="confirm password"
+    type="password"
+    placeholder="re-enter password"
+    formControlName="confirmPassword"
+    [error]="getErrorMessage('confirmPassword', signupForm,'confirm passowrd')"
+  />
+
+  @if (signupForm.errors?.['passwordMismatch']) {
+    <p class="error">
+      Passwords do not match
+    </p>
+  }
+</div>
+<div class="form-grid">
+  <button
+    type="submit"
+    class="btn-login"
+    [disabled]="signupForm.invalid"
+  >
+    Sign Up
+  </button>
+</div>
+</form>

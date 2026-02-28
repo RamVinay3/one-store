@@ -1,7 +1,12 @@
-.auth-header{
-    height: 10vh;
-    background-color: rgb(194, 138, 34);
-    padding: 0 8rem;
+:host{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-
+.active {
+ 
+  font-weight: 600;
+  opacity: 1;
+  
+}

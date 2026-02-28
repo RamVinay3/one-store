@@ -4,17 +4,53 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  /* Background */
+  --bg-main: #fffaf0;          /* Soft warm cream */
+  --bg-section: #f4e1c1;       /* Light beige */
+
+  --bg-main--strong: #fffdf9;
+  --white:#fff;
+
+  /* Primary (Tea Leaf Green) */
+  --primary: #2f5d50;
+  --primary-text: #ffffff;
+
+  /* Secondary (Warm Brown) */
+  --secondary: #8b5e34;
+  --secondary-text: #ffffff;
+
+  /* Accent (Honey Gold) */
+  --accent: #d4a017;
+  --accent-text: #2c2c2c;
+
+  /* Text Colors */
+  --text-dark: #2c2c2c;
+  --text-muted: #6b6b6b;
+  --text-light: #ffffff;
+
+  /* Border */
+  --border-light: #e8d8c3;
+
+  /*error messages*/
+  --soft-red : #c0392b;  /* soft red */
+}
 
 html {
   font-size: 62.5%;
 }
+html,body{
+  min-height: 100vh;
+  height: 100%;
+}
+
+
 p,
 a {
   font-size: 1.6rem;
 }
 a{
     transition: all 0.8 ease-in;
-    color: black;
 }
 a:visited,
 a:link {
@@ -24,10 +60,19 @@ a:link {
 }
 a:hover {
   transform: scale(1.2);
-}
+} 
 a:active {
   transform: scale(0.98);
 }
+
+
+/* classes */
+
+
+
+
+
+
 /*flex desings*/
 
 .flex {
@@ -46,4 +91,9 @@ a:active {
 }
 .flex-space-between {
   justify-content: space-between;
+}
+
+
+.mb-2{
+   margin-bottom: 2rem;
 }

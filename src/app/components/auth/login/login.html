@@ -1,1 +1,23 @@
-<h1>Login working</h1>
+
+<form  [formGroup]="loginForm" (ngSubmit)="login()" class="form-group">
+<form-input
+    [error]="getErrorMessage('email',loginForm,'email')"
+    
+    label="email"
+    type="email"
+    placeholder="please enter your email"
+    formControlName="email"
+
+/>
+<form-input
+    [error]="getErrorMessage('password',loginForm,'passowrd')" 
+    label="password"
+    type="password"
+    placeholder="please enter your password"
+    formControlName="password"
+/>
+  <div class="mb-2"></div>  
+<button type="submit" class="btn-login">
+    Login
+  </button>
+</form >

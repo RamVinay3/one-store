@@ -1,0 +1,102 @@
+/* buttons */
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-text);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--secondary-text);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+
+[class*="header"]{
+     padding: 2rem 8rem;
+      
+}
+
+
+nav{
+   
+  background: var(--primary);
+  color: var(--primary-text);
+}
+
+nav a{
+    color: var(--primary-text);
+    opacity: 0.7;
+}
+
+.section-light {
+  background: var(--bg-section);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-main);
+  color: var(--text-dark);
+}
+
+
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+.btn-login {
+  max-width: 42rem;
+  width: 100%;
+  padding: 1.6rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+
+  background: var(--primary);
+  color: var(--text-light);
+
+  transition: 
+    background 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+.btn-login:disabled {
+  background: var(--secondary);
+  color: var(--text-light);
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Hover */
+.btn-login:not(:disabled):hover {
+  background: var(--secondary);
+  transform: translateY(-3px);
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.08);
+}
+
+/* Active (click) */
+.btn-login:not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: none;
+  
+}
+.btn-login {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+@media(max-width:550px){
+ [class*="header"]{
+     padding: 2rem 4rem;
+      
+}
+}

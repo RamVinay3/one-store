@@ -1,0 +1,58 @@
+:host{
+  display: flex;
+  background-color: var(--bg-section);
+  justify-content: center;
+  align-items: center;
+  flex: 1;   
+  
+}
+
+.form-group {
+  max-width: 80rem;
+  width: 100%;
+  margin: 4rem auto;
+  padding: 3rem;
+  background: #fdfaf4;
+  border-radius: 1.6rem;
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.05);
+  
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+}
+
+
+
+.btn-login {
+  grid-column: 1 / -1;  /* spans both columns */
+  max-width: 100%;
+}
+
+
+
+@media (max-width: 830px)  {
+
+  .form-group{
+    overflow-y: scroll;
+    max-width: 48rem;
+  }
+  .form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 2rem;
+}
+}
+
+
+@media (max-width: 550px)  {
+
+  .form-group{
+   
+    min-width: 30rem;
+  }
+ :host{
+  padding: 0px 2rem;  
+ }
+}
