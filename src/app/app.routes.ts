@@ -4,10 +4,11 @@ import { Dashboard } from './components/main/dashboard/dashboard';
 import { Products } from './components/main/products/products';
 import { Cart } from './components/main/cart/cart';
 import { Review } from './components/main/review/review';
-import { loginGuard } from './services/auth/login.guard';
-import { authGuard } from './services/auth/auth.guard';
+import { loginGuard } from './utils/login.guard';
+import { authGuard } from './utils/auth.guard';
 import { Signup } from './components/auth/signup/signup';
 import { AuthLayout } from './components/auth/auth-layout/auth-layout';
+import { Profile } from './components/main/profile/profile';
 
 export const routes: Routes = [
   {
@@ -17,11 +18,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'login',
-        component: Login
+        component: Login,
       },
       {
         path: 'signup',
-        component: Signup
+        component: Signup,
       },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
@@ -39,6 +40,19 @@ export const routes: Routes = [
         path: 'cart',
         component: Cart,
       },
+      {
+        path:'profile',
+        component:Profile
+      },
+      {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full',
+      },
+      {
+        path: '**',
+        redirectTo: 'products',
+      }
     ],
   },
   {

@@ -78,6 +78,16 @@ a:active {
 .flex {
   display: flex;
 }
+.gap--2{
+  gap:2rem;
+}
+
+.gap--3{
+  gap: 3rem;
+}
+.gap--1{
+  gap:1rem;
+}
 .flex-column {
   flex-direction: column;
   justify-content: center;
@@ -97,3 +107,4 @@ a:active {
 .mb-2{
    margin-bottom: 2rem;
 }
+

@@ -1,32 +1,19 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterOutlet, RouterLinkWithHref, Router, NavigationEnd } from '@angular/router';
+import { RouterOutlet, RouterLinkActive,RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
+import { CurrentRoute } from '../../../services/currentRoute/current-route';
 
 @Component({
   selector: 'app-auth-layout',
-  imports: [RouterOutlet, RouterLinkWithHref],
+  imports: [RouterOutlet, RouterLinkActive,RouterLink],
   templateUrl: './auth-layout.html',
   styleUrl: './auth-layout.css',
 })
-export class AuthLayout implements OnInit {
+export class AuthLayout  {
 
-  router=inject(Router);
-  currentRoute=signal('');
+ 
 
-  setCurrentRoute=(url:string)=>{
-     const paths=url.split('/');
-    this.currentRoute.set(paths[paths.length-1]);
-    console.log( this.currentRoute(),'route');
-  }
-  ngOnInit(): void {
-    
-   this.setCurrentRoute(this.router.url);
+  constructor(public routeService:CurrentRoute){}
 
-  this.router.events
-    .pipe(filter(event => event instanceof NavigationEnd))
-    .subscribe(() => {
-      this.setCurrentRoute(this.router.url);
-    });
-   
-  }
+  
 }

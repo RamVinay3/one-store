@@ -1,1 +1,11 @@
-<p>dashboard works!</p>
+<nav class="dashboard-header flex flex-space-between">
+  <div>
+    <p class="align-self">Pista's Pilot.</p>
+  </div>
+  <div class="flex gap--2">
+    <a  routerLinkActive="active" routerLink="products">Products</a>
+    <a routerLinkActive="active" routerLink="cart">Cart</a>
+    <a routerLinkActive="active" routerLink="profile">Profile</a>
+  </div>
+</nav>
+<router-outlet />
