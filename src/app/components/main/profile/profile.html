@@ -1,1 +1,70 @@
-<p>profile works!</p>
+<section class="profile-page">
+  <div class="profile-shell">
+    <!-- Header -->
+    <header class="profile-header">
+      <div class="profile-avatar">
+        {{ initials }}
+      </div>
+
+      <div class="profile-header__content">
+        <p class="profile-eyebrow">My Account</p>
+        <h1 class="profile-title">{{ fullName }}</h1>
+        <p class="profile-subtitle">Manage your personal details and contact information</p>
+      </div>
+
+      <button type="button" class="profile-edit-btn" (click)="onEditProfile()">
+        Edit Profile
+      </button>
+    </header>
+
+    <!-- Main Card -->
+    <section class="profile-card">
+      <div class="profile-card__top">
+        <div>
+          <p class="section-label">Profile Details</p>
+          <h2 class="section-title">Personal Information</h2>
+        </div>
+
+        <span class="status-pill">Active</span>
+      </div>
+
+      <div class="profile-grid">
+        <!-- First Name -->
+        <article class="info-card">
+          <div class="info-card__icon">👤</div>
+          <div class="info-card__content">
+            <p class="info-card__label">First Name</p>
+            <h3 class="info-card__value">{{ profile.firstName }}</h3>
+          </div>
+        </article>
+
+        <!-- Second Name -->
+        <article class="info-card">
+          <div class="info-card__icon">🧾</div>
+          <div class="info-card__content">
+            <p class="info-card__label">Second Name</p>
+            <h3 class="info-card__value">{{ profile.secondName }}</h3>
+          </div>
+        </article>
+
+        <!-- Email -->
+        <article class="info-card">
+          <div class="info-card__icon">✉️</div>
+          <div class="info-card__content">
+            <p class="info-card__label">Email</p>
+            <h3 class="info-card__value info-card__value--small">{{ profile.email }}</h3>
+          </div>
+        </article>
+
+        <!-- Mobile Number -->
+        <article class="info-card">
+          <div class="info-card__icon">📱</div>
+          <div class="info-card__content">
+            <p class="info-card__label">Mobile No</p>
+            <h3 class="info-card__value">{{ profile.mobileNo }}</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+</section>

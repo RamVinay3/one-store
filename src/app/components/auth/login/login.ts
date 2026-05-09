@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule, Form, FormGroup } from '@angular/forms';
 import { FormInput } from '../../shared/input/input';
 import { namedPatternValidator } from '../../../../validators';
 import { REGEX_PATTERNS } from '../../../../regexPatterns';
 import { getErrorMessage } from '../../../../getError';
 import { Router } from '@angular/router';
+import { HttpService } from '../../../services/api/api';
+import { API_END_POINT } from '../../../../globalConstants';
+import { Authservices } from '../../../services/auth/authservices';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,8 @@ import { Router } from '@angular/router';
 export class Login implements OnInit {
   constructor(private fb: FormBuilder,private router:Router) {}
   getErrorMessage = getErrorMessage;
-
+  //private httpService= inject(HttpService);
+  private authService=inject(Authservices);
   loginForm!: FormGroup;
   
   ngOnInit() {
@@ -33,12 +37,22 @@ export class Login implements OnInit {
   }
 
   login() {
-    const errors=this.loginForm.get('password');
-    console.log('vinay logged in',errors);
+    // const errors=this.loginForm.get('password')?.errors;
+    // console.log('vinay logged in',errors);
+    
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-      localStorage.setItem('jwt',"Iam present");
-      this.router.navigate(['/dashboard'],{ replaceUrl: true });
+     
+      this.authService.login(this.loginForm.value).subscribe({
+            next: (res) => {
+              this.router.navigate(['/dashboard'], { replaceUrl: true });
+            },
+            error: (error) => {
+              console.error(error);
+            },
+          });;
+
+    
+      
     }
   }
 }

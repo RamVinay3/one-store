@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet, RouterLinkActive,RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
-import { CurrentRoute } from '../../../services/currentRoute/current-route';
 
 @Component({
   selector: 'app-auth-layout',
@@ -13,7 +12,7 @@ export class AuthLayout  {
 
  
 
-  constructor(public routeService:CurrentRoute){}
+  constructor(){}
 
   
 }

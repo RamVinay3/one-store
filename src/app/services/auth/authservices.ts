@@ -1,23 +1,53 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpService } from '../api/api';
+import { API_END_POINT } from '../../../globalConstants';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Authservices {
-  isLoggedIn=signal(false);
-  
-  constructor(){
-    const token=localStorage.getItem('jwt');
-    console.log(token);
-    if(token==null)this.isLoggedIn.set(false);
-    else this.isLoggedIn.set(true);
-  }
+  httpServices = inject(HttpService);
+  router = inject(Router);
+  isLoggedIn = signal(false);
 
-  login() {
-    this.isLoggedIn.set(true);
+  constructor() {}
+
+  loadCurrentUser() {
+    return this.httpServices.get(API_END_POINT.IS_AUTHORISED).pipe(
+      tap((res)=>{
+         this.isLoggedIn.set(true);
+      })
+    )
+    
+    
+    
+    
+  }
+  login(formValues: any) {
+    const { email, password } = formValues; //this.loginForm.value;
+
+    const payload = {
+      email,
+      password
+    };
+    return this.httpServices.post(API_END_POINT.LOGIN, payload).pipe(
+      tap((res)=>{
+        //console.log(res,"response from tap");
+        this.isLoggedIn.set(true);
+      })
+    );
   }
 
   logout() {
-    this.isLoggedIn.set(false);
+
+    return this.httpServices.get(API_END_POINT.LOGOUT).pipe(
+      tap((res)=>{
+       // console.log(res,"from tap");
+         this.isLoggedIn.set(false);
+      })
+    );
+    
   }
 }

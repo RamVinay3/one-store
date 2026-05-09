@@ -4,8 +4,16 @@
   </div>
   <div class="flex gap--2">
     <a  routerLinkActive="active" routerLink="products">Products</a>
-    <a routerLinkActive="active" routerLink="cart">Cart</a>
+    <a routerLinkActive="active" routerLink="cart" class="has-cart-items">Cart
+     
+      @if(cartService.cart.length>0){
+       
+        <span class="cart-badge">{{cartService.cart.length}}</span>
+      }
+      
+    </a>
     <a routerLinkActive="active" routerLink="profile">Profile</a>
+    <a href="#"  (click)="logout()">Logout</a>
   </div>
 </nav>
 <router-outlet />

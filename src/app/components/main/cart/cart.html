@@ -1,1 +1,202 @@
-<p>cart works!</p>
+<section class="cart-page">
+  <div class="cart-page__header">
+    <div>
+     
+      @if(cartItems.length>0){
+          <h1 class="cart-page__title">Your Cart</h1>
+      <p class="cart-page__subtitle">
+        Review your items, update quantities, and place your order.
+      </p>
+      }
+    
+    </div>
+
+    @if (cartItems.length > 0) {
+      <div class="cart-page__count-badge">
+        {{ itemCount }} {{ itemCount === 1 ? 'item' : 'items' }}
+      </div>
+    }
+  </div>
+
+  @if (cartItems.length === 0) {
+    <section class="empty-cart">
+      <div class="empty-cart__icon">🛒</div>
+      <h2 class="empty-cart__title">Your cart is empty</h2>
+      <p class="empty-cart__text">
+        Add your favorite coffee, snacks, and meals to get started.
+      </p>
+      <button type="button" class="empty-cart__button" (click)="navigateToProductPage()">Browse Menu</button>
+    </section>
+  } @else {
+    <section class="cart-layout">
+      <!-- LEFT: CART ITEMS -->
+      <div class="cart-items-panel">
+        <div class="cart-items-panel__header">
+          <h2 class="section-title">Cart Items</h2>
+          <p class="section-subtitle">Modify your order before checkout</p>
+        </div>
+
+        <div class="cart-items-list">
+          @for (item of cartItems; track trackByCartItem($index, item)) {
+            <article class="cart-item-card">
+              <div class="cart-item-card__image-wrap">
+                <img
+                  class="cart-item-card__image"
+                  [src]="item.url.main || item || '/images/products/americano-thumb.avif'"
+                  [alt]="item.productName"
+                />
+              </div>
+
+              <div class="cart-item-card__content">
+                <div class="cart-item-card__top-row">
+                  <div class="cart-item-card__meta">
+                    <h3 class="cart-item-card__name">{{ item.productName }}</h3>
+
+                    @if (item.variantLabel || item.quantityLabel) {
+                      <p class="cart-item-card__variant">
+                        {{ item.variantLabel || 'Regular' }}
+                        @if (item.quantityLabel) {
+                          <span>• {{ item.quantityLabel }}</span>
+                        }
+                      </p>
+                    }
+                  </div>
+
+                  <button
+                    type="button"
+                    class="icon-btn icon-btn--danger"
+                    (click)="removeItem(item)"
+                    aria-label="Remove item"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div class="cart-item-card__price-row">
+                  @if (item.originalPrice && item.originalPrice > item.price) {
+                    <span class="cart-item-card__original-price">
+                      ₹{{ item.originalPrice }}
+                    </span>
+                  }
+
+                  <span class="cart-item-card__price">₹{{ item.price }}</span>
+
+                  @if (item.originalPrice && item.originalPrice > item.price) {
+                    <span class="cart-item-card__discount-chip">
+                      Save ₹{{ item.originalPrice - item.price }}
+                    </span>
+                  }
+                </div>
+
+                <div class="cart-item-card__bottom-row">
+                  <div class="qty-control">
+                    <button
+                      type="button"
+                      class="qty-control__btn"
+                      (click)="decreaseQty(item)"
+                      aria-label="Decrease quantity"
+                    >
+                      −
+                    </button>
+
+                    <span class="qty-control__value">{{ item.quantity }}</span>
+
+                    <button
+                      type="button"
+                      class="qty-control__btn"
+                      (click)="increaseQty(item)"
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <div class="cart-item-card__line-total">
+                    ₹{{ item.price * item.quantity }}
+                  </div>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+
+      <!-- RIGHT: BILL SUMMARY -->
+      <aside class="bill-summary-card">
+        <div class="bill-summary-card__header">
+          <h2 class="section-title">Bill Summary</h2>
+          <p class="section-subtitle">A quick breakdown of your order</p>
+        </div>
+
+        <div class="bill-summary-list">
+          <div class="bill-row">
+            <span>Items Total</span>
+            <span>₹{{ subtotal }}</span>
+          </div>
+
+          @if (totalDiscount > 0) {
+            <div class="bill-row bill-row--discount">
+              <span>Discount</span>
+              <span>- ₹{{ totalDiscount }}</span>
+            </div>
+          }
+
+          <div class="bill-row">
+            <span>GST (5%)</span>
+            <span>₹{{ tax }}</span>
+          </div>
+
+          <div class="bill-row">
+            <span>Packing Charge</span>
+            <span>₹{{ packingCharge }}</span>
+          </div>
+
+          <div class="bill-divider"></div>
+
+          <div class="bill-row bill-row--total">
+            <span>Grand Total</span>
+            <span>₹{{ grandTotal }}</span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="checkout-btn"
+          (click)="onCheckout()"
+        >
+          Place Order
+        </button>
+
+        <p class="bill-summary-note">
+          Fresh items prepared after order confirmation.
+        </p>
+      </aside>
+    </section>
+  }
+</section>
+
+@if (isOrderPlaced) {
+  <div class="order-success-overlay" (click)="closeOrderSuccess()">
+    <div class="order-success-modal" (click)="$event.stopPropagation()">
+      <div class="order-success-check">
+        <svg viewBox="0 0 52 52" class="order-success-check__svg">
+          <circle class="order-success-check__circle" cx="26" cy="26" r="25" fill="none"></circle>
+          <path class="order-success-check__tick" fill="none" d="M14 27l7 7 17-17"></path>
+        </svg>
+      </div>
+
+      <h2 class="order-success-title">Order Placed Successfully!</h2>
+      <p class="order-success-text">
+        Your delicious order is being prepared. Sit back and enjoy the aroma ☕
+      </p>
+
+      <button
+        type="button"
+        class="order-success-btn"
+        (click)="closeOrderSuccess()"
+      >
+        Awesome!
+      </button>
+    </div>
+  </div>
+}

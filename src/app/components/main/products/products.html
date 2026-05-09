@@ -1,1 +1,129 @@
-<p>products works!</p>
+<section class="product-page">
+
+  @if(false){
+     <div class="page-header">
+    <div>
+      <p class="page-subtitle">Freshly brewed & delicious bites</p>
+      <h1 class="page-title">Coffee Shop Menu</h1>
+    </div>
+  </div>
+  }
+ 
+
+  <div class="product-grid">
+    @for (product of products; track product.id) {
+      <article class="product-card" [class.out-of-stock]="!product.isAvailable">
+        <div class="product-image-wrapper">
+          <img
+            class="product-image"
+            [src]="product.image.thumbnail || product.image.main"
+            [alt]="product.name"
+          />
+
+          @if (!product.isAvailable) {
+            <span class="stock-badge stock-badge--out">Out of stock</span>
+          } @else {
+            <span class="stock-badge" [class.non-veg]="!product.isVeg">
+              {{ product.isVeg ? 'Veg' : 'Non-Veg' }}
+            </span>
+          }
+
+          @if (hasDiscount(getPrimaryVariant(product))) {
+            <span class="discount-chip">
+              {{ getDiscountPercent(getPrimaryVariant(product)) }}% OFF
+            </span>
+          }
+        </div>
+
+        <div class="product-content">
+          <p class="product-category">{{ product.category }}</p>
+
+          <h3 class="product-title">{{ product.name }}</h3>
+
+          <p class="product-description">{{ product.shortDescription }}</p>
+
+          <div class="product-attributes">
+            @for (attribute of product.attributes.slice(0, 2); track attribute.name) {
+              <span class="attribute-pill">
+                {{ attribute.name }}: {{ attribute.value }}
+              </span>
+            }
+          </div>
+
+          <div class="product-price-row">
+            @if (hasDiscount(getPrimaryVariant(product))) {
+              <span class="original-price">
+                ₹{{ getPrimaryVariant(product).originalPrice }}
+              </span>
+            }
+
+            <span class="current-price">
+              ₹{{ getPrimaryVariant(product).price }}
+            </span>
+          </div>
+
+          <div class="variant-summary">
+            @if (product.variants.length > 1) {
+              <span>{{ product.variants.length }} variants available</span>
+            } @else {
+              <span>{{ getPrimaryVariant(product).quantityLabel }}</span>
+            }
+          </div>
+
+          <button
+            class="add-btn"
+            [disabled]="!product.isAvailable"
+            (click)="chooseProduct(product)"
+          >
+            {{ product.variants.length > 1 ? 'Choose & Add' : 'Add' }}
+          </button>
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
+@if (isVariantSheetOpen && selectedProduct) {
+  <div class="sheet-backdrop" (click)="closeVariantSheet()"></div>
+
+  <section class="bottom-sheet" (click)="$event.stopPropagation()">
+    <div class="sheet-handle"></div>
+
+    <div class="sheet-header">
+      <div class="sheet-header-content">
+        <p class="sheet-category">{{ selectedProduct.category }}</p>
+        <h2 class="sheet-title">{{ selectedProduct.name }}</h2>
+        <p class="sheet-description">{{ selectedProduct.shortDescription }}</p>
+      </div>
+
+      <button class="sheet-close-btn" (click)="closeVariantSheet()">
+        ✕
+      </button>
+    </div>
+
+    <div class="variant-list">
+      @for (variant of selectedProduct.variants; track variant.id) {
+        <div class="variant-card">
+          <div class="variant-left">
+            <p class="variant-name">{{ getVariantLabel(variant) }}</p>
+            <p class="variant-quantity">{{ variant.quantityLabel }}</p>
+          </div>
+
+          <div class="variant-right">
+            <div class="variant-price-row">
+              @if (hasDiscount(variant)) {
+                <span class="original-price">₹{{ variant.originalPrice }}</span>
+              }
+
+              <span class="current-price">₹{{ variant.price }}</span>
+            </div>
+
+            <button class="variant-add-btn" (click)="addToCart(selectedProduct, variant)">
+              Add
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+}
