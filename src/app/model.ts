@@ -4,7 +4,7 @@ export interface ProductImages {
   gallery?: string[];
 }
 export interface ProductVariant {
-  id: string;
+  _id: string;
   label?: string;        // Small / Medium / Large
   quantityLabel: string; // 200ml / 300ml / 500ml
   price: number;
@@ -15,7 +15,7 @@ export interface ProductAttributes{
     value:string;
 }
 export interface Product {
-  id: string;
+  _id: string;
   name: string;
   image: ProductImages;
   category: string;

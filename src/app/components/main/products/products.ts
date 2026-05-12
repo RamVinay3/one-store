@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { Product, ProductVariant } from '../../../model';
 import { CartService } from '../../../services/cart/cart';
-import { products } from '../../../db-data';
+import { ProductService } from '../../../services/products/products';
+
 
 @Component({
   selector: 'app-products',
@@ -9,12 +10,24 @@ import { products } from '../../../db-data';
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
-export class Products {
+export class Products  implements OnInit{
 
-  products=products;
+  products : WritableSignal<Product[]> =signal([]);
   cartService = inject(CartService);
   selectedProduct: Product | null = null;
   isVariantSheetOpen = false;
+
+
+  productService=inject(ProductService);
+
+  ngOnInit(): void {
+    this.productService.getAllProducts().subscribe({
+      next:(res:any)=>{
+        this.products.set(res);
+        console.log(res,"response")
+      }
+    });
+  }
 
   closeVariantSheet(): void {
     this.isVariantSheetOpen = false;
@@ -63,10 +76,10 @@ export class Products {
   }
 
   trackByProductId(index: number, product: Product): string {
-    return product.id;
+    return product._id;
   }
   trackByVariantId(index: number, variant: ProductVariant): string {
-    return variant.id;
+    return variant._id;
   }
 
 }

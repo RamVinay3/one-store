@@ -11,7 +11,7 @@
  
 
   <div class="product-grid">
-    @for (product of products; track product.id) {
+    @for (product of products(); track $index) {
       <article class="product-card" [class.out-of-stock]="!product.isAvailable">
         <div class="product-image-wrapper">
           <img
@@ -43,7 +43,7 @@
           <p class="product-description">{{ product.shortDescription }}</p>
 
           <div class="product-attributes">
-            @for (attribute of product.attributes.slice(0, 2); track attribute.name) {
+            @for (attribute of product.attributes.slice(0, 2); track $index) {
               <span class="attribute-pill">
                 {{ attribute.name }}: {{ attribute.value }}
               </span>
@@ -102,7 +102,7 @@
     </div>
 
     <div class="variant-list">
-      @for (variant of selectedProduct.variants; track variant.id) {
+      @for (variant of selectedProduct.variants; track $index) {
         <div class="variant-card">
           <div class="variant-left">
             <p class="variant-name">{{ getVariantLabel(variant) }}</p>

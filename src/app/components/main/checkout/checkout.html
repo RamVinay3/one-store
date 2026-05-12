@@ -3,9 +3,9 @@
     <div>
      
       @if(cartItems.length>0){
-          <h1 class="cart-page__title">Your Cart</h1>
+          <h1 class="cart-page__title">Check Out</h1>
       <p class="cart-page__subtitle">
-        Review your items, update quantities, and place your order.
+        Review your items and place your order.
       </p>
       }
     
@@ -31,10 +31,7 @@
     <section class="cart-layout">
       <!-- LEFT: CART ITEMS -->
       <div class="cart-items-panel">
-        <div class="cart-items-panel__header">
-          <h2 class="section-title">Cart Items</h2>
-          <p class="section-subtitle">Modify your order before checkout</p>
-        </div>
+        
 
         <div class="cart-items-list">
           @for (item of cartItems; track trackByCartItem($index, item)) {
@@ -62,14 +59,7 @@
                     }
                   </div>
 
-                  <button
-                    type="button"
-                    class="icon-btn icon-btn--danger"
-                    (click)="removeItem(item)"
-                    aria-label="Remove item"
-                  >
-                    ✕
-                  </button>
+                  
                 </div>
 
                 <div class="cart-item-card__price-row">
@@ -90,25 +80,11 @@
 
                 <div class="cart-item-card__bottom-row">
                   <div class="qty-control">
-                    <button
-                      type="button"
-                      class="qty-control__btn"
-                      (click)="decreaseQty(item)"
-                      aria-label="Decrease quantity"
-                    >
-                      −
-                    </button>
+                   <span> Quantity : </span>
 
                     <span class="qty-control__value">{{ item.quantity }}</span>
 
-                    <button
-                      type="button"
-                      class="qty-control__btn"
-                      (click)="increaseQty(item)"
-                      aria-label="Increase quantity"
-                    >
-                      +
-                    </button>
+                   
                   </div>
 
                   <div class="cart-item-card__line-total">
@@ -164,7 +140,7 @@
           class="checkout-btn"
           (click)="onCheckout()"
         >
-          Proceed To Checkout
+          Place Order
         </button>
 
         <p class="bill-summary-note">

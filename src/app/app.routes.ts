@@ -9,6 +9,7 @@ import { authGuard } from './utils/auth.guard';
 import { Signup } from './components/auth/signup/signup';
 import { AuthLayout } from './components/auth/auth-layout/auth-layout';
 import { Profile } from './components/main/profile/profile';
+import { Checkout } from './components/main/checkout/checkout';
 
 export const routes: Routes = [
   {
@@ -56,8 +57,8 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'review',
-    component: Review,
+    path: 'checkout',
+    component: Checkout,
     canActivate: [authGuard],
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

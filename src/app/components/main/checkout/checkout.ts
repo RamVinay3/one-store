@@ -2,21 +2,16 @@ import { Component, inject } from '@angular/core';
 import { CartService } from '../../../services/cart/cart';
 import { Router } from '@angular/router';
 import { CartItem } from '../../../model';
-import { HttpService } from '../../../services/api/api';
-import { API_END_POINT } from '../../../../globalConstants';
 
 @Component({
-  selector: 'app-cart',
+  selector: 'app-checkout',
   imports: [],
-  templateUrl: './cart.html',
-  styleUrl: './cart.css',
+  templateUrl: './checkout.html',
+  styleUrl: './checkout.css',
 })
-export class Cart {
-cartService = inject(CartService);
+export class Checkout {
+  cartService = inject(CartService);
 router=inject(Router);
-httpService=inject(HttpService);
-
-
 isPlacingOrder = false;
 isOrderPlaced = false;
 
@@ -78,19 +73,18 @@ isOrderPlaced = false;
 
   onCheckout(): void {
      if (!this.cartService.cart.length) return;
-   
-    this.cartService.updateDatabase().subscribe({
-      next:(res)=>{
-        setTimeout(() => {
-      this.router.navigate(['/checkout']);
-      }, 1000);
-      }
-    }
-    );
-   
+    this.isPlacingOrder=true;
+    //we will call a service then make isOrderPlaced true
+    this.isOrderPlaced = true;
+    setTimeout(() => {
+      this.isOrderPlaced = false;
+      this.closeOrderSuccess();
+      this.cartService.makeEmpty();
+       this.router.navigate(['/dashboard/products']);
+    }, 2500);
   }
   closeOrderSuccess(): void {
     this.isOrderPlaced = false;
-
   }
+
 }

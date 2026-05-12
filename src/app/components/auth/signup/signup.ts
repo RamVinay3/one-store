@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormInput } from '../../shared/input/input';
-import { email } from '@angular/forms/signals';
 import { namedPatternValidator } from '../../../../validators';
 import { REGEX_PATTERNS } from '../../../../regexPatterns';
 import { getErrorMessage } from '../../../../getError';

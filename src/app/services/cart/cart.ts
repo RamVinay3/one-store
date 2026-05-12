@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CartItem, Product, ProductVariant } from '../../model';
+import { HttpService } from '../api/api';
+import { API_END_POINT } from '../../../globalConstants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+
+  httpServices=inject(HttpService);
 
   cart:CartItem[]=[];
   cartMap:Map<string,number>=new Map();
@@ -36,9 +40,9 @@ export class CartService {
   addItem(product: Product, variant: ProductVariant){
 
      const cartItem:CartItem = {
-       productId: product.id,
+       productId: product._id,
        productName: product.name,
-       variantId: variant.id,
+       variantId: variant._id,
        variantLabel: variant.label ?? 'Standard',
        quantityLabel: variant.quantityLabel,
        price: variant.price,
@@ -83,8 +87,13 @@ export class CartService {
     }
   }
 
-  makeEmpty(){
+ public  makeEmpty(){
     this.cartMap.clear();
     this.cart=[];
+  }
+
+  updateDatabase(){
+    const payload=this.cart;
+    return this.httpServices.post(API_END_POINT.UPDATE_CART,payload);
   }
 }

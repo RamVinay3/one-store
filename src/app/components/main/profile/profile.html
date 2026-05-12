@@ -34,7 +34,7 @@
           <div class="info-card__icon">👤</div>
           <div class="info-card__content">
             <p class="info-card__label">First Name</p>
-            <h3 class="info-card__value">{{ profile.firstName }}</h3>
+            <h3 class="info-card__value">{{ profile().firstName }}</h3>
           </div>
         </article>
 
@@ -43,7 +43,7 @@
           <div class="info-card__icon">🧾</div>
           <div class="info-card__content">
             <p class="info-card__label">Second Name</p>
-            <h3 class="info-card__value">{{ profile.secondName }}</h3>
+            <h3 class="info-card__value">{{ profile().lastName }}</h3>
           </div>
         </article>
 
@@ -52,7 +52,7 @@
           <div class="info-card__icon">✉️</div>
           <div class="info-card__content">
             <p class="info-card__label">Email</p>
-            <h3 class="info-card__value info-card__value--small">{{ profile.email }}</h3>
+            <h3 class="info-card__value info-card__value--small">{{ profile().email }}</h3>
           </div>
         </article>
 
@@ -61,7 +61,7 @@
           <div class="info-card__icon">📱</div>
           <div class="info-card__content">
             <p class="info-card__label">Mobile No</p>
-            <h3 class="info-card__value">{{ profile.mobileNo }}</h3>
+            <h3 class="info-card__value">{{ profile().mobile }}</h3>
           </div>
         </article>
       </div>
